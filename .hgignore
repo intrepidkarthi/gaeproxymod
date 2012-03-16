@@ -1,0 +1,11 @@
+syntax: regexp
+^bin$
+syntax: regexp
+^local\.properties$
+
+syntax: regexp
+^obj$
+syntax: regexp
+^NUL$
+syntax: regexp
+^gen$
