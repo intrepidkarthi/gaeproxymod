@@ -1,0 +1,8 @@
+--- BUILD ---
+
+Create "local.properties" with your android sdk configuration, like this:
+sdk.dir=C:\\Program Files\\Android\\android-sdk-windows
+
+Run ant under this directory.
+
+This file was modified by IntelliJ IDEA 11.0.2 for binding GitHub repository
