@@ -49,9 +49,8 @@
     <string name="proxyed_apps_summary">为应用单独设置代理，需要 ROOT 权限以及 IPTABLES 的支持</string>
     <string name="proxyed_help">选择使用GAE代理的应用:</string>
     <string name="crash_alert">检测到一次非正常退出，状态已重置</string>
-    <string name="copy_rights">GAE代理是一款开源软件，依照GPLv3协议发布。\n\n如果您有任何问题，请前往项目网站进行反馈。
-		\n\n(gaeproxy.googlecode.com)
-	</string>
+    <string name="copy_rights">AE代理是一款开源软件，依照GPLv3协议发布。\n\n如果您有任何问题，请前往项目网站进行反馈。
+		\n\n(gaeproxy.googlecode.com)</string>
     <string name="about">关于</string>
     <string name="proxy_type">代理类型</string>
     <string name="connecting">正在连接...</string>
@@ -76,8 +75,7 @@
     <string name="toast_restart">GAE代理正在重新启动</string>
     <string name="browser">内置浏览器</string>
     <string name="browser_summary">启动内置代理浏览器, 只针对没有ROOT权限或IPTABLES支持的用户</string>
-    <string name="default_proxy_alert">您正在使用默认的代理地址，此地址每天只有10G的带宽配额，也就说您将随时无法正常使用本应用\n\n因此，请尽快部署自己的服务器端，具体步骤和说明见：http://code.google.com/p/goagent/
-	</string>
+    <string name="default_proxy_alert">正在使用默认的代理地址，此地址每天只有10G的带宽配额，也就说您将随时无法正常使用本应用\n\n因此，请尽快部署自己的服务器端，具体步骤和说明见：http://code.google.com/p/goagent/</string>
     <string name="warning">警告</string>
     <string name="dns">DNS代理</string>
     <string name="dns_summary">开启DNS代理</string>
@@ -96,6 +94,7 @@
     <string name="ApplicationNameUrl">Zirco Browser - %s</string>
     <string name="ApplicationDescription">使用Zirco Browser让你更好的使用互联网</string>
     <string name="AboutActivity.Title">关于</string>
+    <string name="AboutActivity.VersionText">版本:</string>
     <string name="AboutActivity.LicenseText">版权:</string>
     <string name="AboutActivity.UrlTextValue">http://code.google.com/p/zirco-browser/</string>
     <string name="AboutActivity.LicenseTextValue">GPL v3</string>
@@ -285,8 +284,7 @@
     </string-array>
 
     <!-- 0.3.3 -->
-    <string name="Constants.SearchUrlGoogle">http://www.google.com/m?hl=en&amp;gl=us&amp;client=ms-null&amp;source=android-browser-key&amp;q=%s
-	</string>
+    <string name="Constants.SearchUrlGoogle">ttp://www.google.com/m?hl=en&amp;gl=us&amp;client=ms-null&amp;source=android-browser-key&amp;q=%s</string>
     <string name="Constants.SearchUrlWikipedia">http://www.baidu.com/s?wd=%s</string>
     <string name="PreferencesActivity.SearchUrlPreferenceTitle">搜索 URL</string>
     <string name="PreferencesActivity.SearchUrlPreferenceSummary">自定义搜索URL</string>
@@ -342,6 +340,7 @@
     <string name="Main.MenuDownloadImage">下载图片</string>
     <string name="Main.MenuSendEmail">发送邮件</string>
     <string name="Main.MenuCopyEmailUrl">复制邮件地址</string>
+    <string name="Main.MenuSelectText">选择文本</string>
     <string name="Commons.UrlCopyToastMessage">地址已经复制到粘贴板</string>
     <string name="DownloadNotification.DownloadStart">下载开始.</string>
     <string name="DownloadNotification.DownloadInProgress">正在下载中.</string>
@@ -380,6 +379,7 @@
     <string name="Commons.SslIDMismatch">站点名和证书不匹配</string>
     <string name="Commons.SslExpired">证书已经过期</string>
     <string name="Commons.SslNotYetValid">证书没有验证</string>
+    <string name="Main.MenuMobileView">Mobile view</string>
     <string name="MobileViewListActivity.Title">Zirco Browser-通过网关访问的网站列表</string>
     <string name="MobileViewListActivity.ListEmpty">列表为空</string>
     <string name="MobileViewListActivity.AddMessage">添加一个网站</string>
@@ -421,20 +421,16 @@
 
     <!-- 0.3.8 -->
     <string name="PreferencesActivity.HideTitleBarPreferenceTitle">Hide title bars</string>
-    <string name="PreferencesActivity.HideTitleBarPreferenceSummary">If checked, windows title bars will not be
-		displayed (need application restart).
-	</string>
+    <string name="PreferencesActivity.HideTitleBarPreferenceSummary">f checked, windows title bars will not be
+		displayed (need application restart).</string>
     <string name="PreferencesActivity.UseWideViewPortPreferenceTitle">Use wide viewport</string>
-    <string name="PreferencesActivity.UseWideViewPortPreferenceSummary">If checked, browser will use a viewport similar to
-		desktop browsers.
-	</string>
+    <string name="PreferencesActivity.UseWideViewPortPreferenceSummary">f checked, browser will use a viewport similar to
+		desktop browsers.</string>
     <string name="PreferencesActivity.LoadWithOverviewPreferenceTitle">Load pages with overview</string>
-    <string name="PreferencesActivity.LoadWithOverviewPreferenceSummary">If checked, pages will load zoomed out to show an
-		overview of the page.
-	</string>
+    <string name="PreferencesActivity.LoadWithOverviewPreferenceSummary">f checked, pages will load zoomed out to show an
+		overview of the page.</string>
     <string name="PreferencesActivity.SwitchTabsMethodPreferenceTitle">Switch tabs method</string>
-    <string name="PreferencesActivity.SwitchTabsMethodPreferenceSummary">Define how you can switch between open tabs.
-	</string>
+    <string name="PreferencesActivity.SwitchTabsMethodPreferenceSummary">efine how you can switch between open tabs.</string>
     <string name="PreferencesActivity.SwitchTabButtons">Buttons</string>
     <string name="PreferencesActivity.SwitchTabFling">Fling</string>
     <string name="PreferencesActivity.SwitchTabBoth">Both</string>
@@ -460,10 +456,9 @@
     <string name="QuickAction.Share">Share</string>
     <string name="QuickAction.SelectText">选择文本</string>
     <string name="QuickAction.MobileView">移动网关</string>
-    <string name="AboutActivity.OtherLicenseText">This application include code from the GreenDroid
+    <string name="AboutActivity.OtherLicenseText">his application include code from the GreenDroid
 		project (https://github.com/cyrilmottier/GreenDroid/), licensed under
-		the Apache license, version 2.
-	</string>
+		the Apache license, version 2.</string>
 
     <!-- 0.4.0 -->
     <string name="PreferencesActivity.WeavePreferenceTitle">Firefox bookmarks synchronization</string>
@@ -496,8 +491,7 @@
     <string name="WeaveSync.WrittingData">Writting data...</string>
     <string name="Errors.WeaveSyncFailedTitle">Synchronization failed.</string>
     <string name="Errors.WeaveSyncFailedMessage">Synchronization failed: %s</string>
-    <string name="Errors.WeaveAuthFailedMessage">Invalid authentication token. Check your settings.
-	</string>
+    <string name="Errors.WeaveAuthFailedMessage">nvalid authentication token. Check your settings.</string>
     <string name="WeaveServerPreferenceActivity.Prompt">Server</string>
     <string name="WeaveServerPreferenceActivity.Title">Server</string>
     <string name="WeaveServerPreferenceActivity.DefaultServer">Firefox Sync server</string>
@@ -511,8 +505,7 @@
     <string name="Main.FileChooserPrompt">Choose file for upload</string>
     <string name="Commons.HistoryBookmarksExportSDCardConfirmation">Export history and bookmarks</string>
     <string name="Commons.HistoryBookmarksExportSDCardDoneTitle">Export done</string>
-    <string name="Commons.HistoryBookmarksExportSDCardDoneMessage">Your history and bookmarks have been saved to %s.
-	</string>
+    <string name="Commons.HistoryBookmarksExportSDCardDoneMessage">our history and bookmarks have been saved to %s.</string>
     <string name="Commons.HistoryBookmarksExportSDCardFailedTitle">Export failed</string>
     <string name="Commons.HistoryBookmarksFailedMessage">Error message: %s.</string>
     <string name="Commons.HistoryBookmarksImportSDCardFailedTitle">Import failed</string>
@@ -520,17 +513,13 @@
 		proceed?</string>
     <string name="PreferencesActivity.ToolsCategoryTitle">Tools</string>
     <string name="PreferencesActivity.ToolsHistoryBookmarksPreferenceTitle">Manage bookmarks and history</string>
-    <string name="PreferencesActivity.ToolsHistoryBookmarksPreferenceSummary">Import, export, clear history and bookmarks.
-	</string>
+    <string name="PreferencesActivity.ToolsHistoryBookmarksPreferenceSummary">mport, export, clear history and bookmarks.</string>
     <string name="PreferencesActivity.ExportHistoryBookmarksPreferenceTitle">Export bookmarks and history</string>
-    <string name="PreferencesActivity.ExportHistoryBookmarksPreferenceSummary">Export bookmarks and history to the SD card.
-	</string>
+    <string name="PreferencesActivity.ExportHistoryBookmarksPreferenceSummary">xport bookmarks and history to the SD card.</string>
     <string name="PreferencesActivity.ImportHistoryBookmarksPreferenceTitle">Import bookmarks and history</string>
-    <string name="PreferencesActivity.ImportHistoryBookmarksPreferenceSummary">Import bookmarks and history from the SD card.
-	</string>
+    <string name="PreferencesActivity.ImportHistoryBookmarksPreferenceSummary">mport bookmarks and history from the SD card.</string>
     <string name="PreferencesActivity.PrivacyClearHistoryBookmarksTitle">Clear history and/or bookmarks</string>
-    <string name="PreferencesActivity.SummaryCannotBeUndone">Use with caution, this operation cannot be undone.
-	</string>
+    <string name="PreferencesActivity.SummaryCannotBeUndone">se with caution, this operation cannot be undone.</string>
     <string name="Commons.ClearingHistoryBookmarks">Clearing history and/or bookmarks...</string>
     <string name="Commons.ClearHistoryBookmarks">Clear history and/or bookmarks</string>
     <string name="Commons.Bookmarks">Bookmarks</string>
