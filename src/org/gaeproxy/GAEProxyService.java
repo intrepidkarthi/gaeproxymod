@@ -390,12 +390,12 @@ public class GAEProxyService extends Service {
 	/** Called when the activity is first created. */
 	public boolean handleConnection() {
 
-		try {
-			InetAddress addr = InetAddress.getByName("www.google.cn");
-			appHost = addr.getHostAddress();
-		} catch (Exception ignore) {
-			// Nothing
-		}
+//		try {
+//			InetAddress addr = InetAddress.getByName("www.google.cn");
+//			appHost = addr.getHostAddress();
+//		} catch (Exception ignore) {
+//			// Nothing
+//		}
 
 //		if (isDNSBlocked) {
 //
