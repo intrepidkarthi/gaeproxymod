@@ -35,7 +35,7 @@ import android.util.Log;
 public abstract class BetterHttpRequestBase implements BetterHttpRequest,
 		ResponseHandler<BetterHttpResponse> {
 
-	private static final int MAX_RETRIES = 5;
+	private static final int MAX_RETRIES = 3;
 
 	protected static final String HTTP_CONTENT_TYPE_HEADER = "Content-Type";
 
@@ -47,8 +47,11 @@ public abstract class BetterHttpRequestBase implements BetterHttpRequest,
 
 	protected int maxRetries = MAX_RETRIES;
 
-	private int oldTimeout; // used to cache the global timeout when changing it
-							// for one request
+	private int oldSoTimeout; // used to cache the global timeout when changing
+								// it for one request
+
+	private int oldCoTimeout; // used to cache the global timeout when changing
+								// it for one request
 
 	private int executionCount;
 
@@ -143,8 +146,9 @@ public abstract class BetterHttpRequestBase implements BetterHttpRequest,
 			} finally {
 				// if timeout was changed with this request using withTimeout(),
 				// reset it
-				if (oldTimeout != BetterHttp.getSocketTimeout()) {
-					BetterHttp.setSocketTimeout(oldTimeout);
+				if (oldSoTimeout != BetterHttp.getSocketTimeout()
+						|| oldCoTimeout != BetterHttp.getConnTimeout()) {
+					BetterHttp.setTimeout(oldSoTimeout, oldCoTimeout);
 				}
 			}
 		}
@@ -161,11 +165,15 @@ public abstract class BetterHttpRequestBase implements BetterHttpRequest,
 	}
 
 	@Override
-	public BetterHttpRequest withTimeout(int timeout) {
-		oldTimeout = httpClient.getParams().getIntParameter(
+	public BetterHttpRequest withTimeout(int soTimeout, int coTimeout) {
+		oldSoTimeout = httpClient.getParams().getIntParameter(
 				CoreConnectionPNames.SO_TIMEOUT,
 				BetterHttp.DEFAULT_SOCKET_TIMEOUT);
-		BetterHttp.setSocketTimeout(timeout);
+		oldCoTimeout = httpClient.getParams().getIntParameter(
+				CoreConnectionPNames.CONNECTION_TIMEOUT,
+				BetterHttp.DEFAULT_CONN_TIMEOUT);
+
+		BetterHttp.setTimeout(soTimeout, coTimeout);
 		return this;
 	}
 }

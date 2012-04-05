@@ -122,7 +122,7 @@ public class GAEProxyService extends Service {
 	private String proxyType = "GoAgent";
 	private DNSServer dnsServer = null;
 	private int dnsPort = 8153;
-	private boolean  isProxyDNS;
+	private boolean isProxyDNS;
 
 	private SharedPreferences settings = null;
 
@@ -132,7 +132,7 @@ public class GAEProxyService extends Service {
 	private boolean isDNSBlocked = true;
 	private boolean isGFWList = false;
 
-//	GoogleAnalyticsTracker tracker;
+	// GoogleAnalyticsTracker tracker;
 
 	private ProxyedApp apps[];
 
@@ -219,12 +219,12 @@ public class GAEProxyService extends Service {
 		try {
 
 			StringBuffer sb = new StringBuffer();
-//			if (isDNSBlocked)
-				sb.append(BASE + "localproxy.sh \"" + Utils.getDataPath(this)
-						+ "\"");
-//			else
-//				sb.append(BASE + "localproxy_en.sh \""
-//						+ Utils.getDataPath(this) + "\"");
+			// if (isDNSBlocked)
+			sb.append(BASE + "localproxy.sh \"" + Utils.getDataPath(this)
+					+ "\"");
+			// else
+			// sb.append(BASE + "localproxy_en.sh \""
+			// + Utils.getDataPath(this) + "\"");
 
 			if (proxyType.equals("GAppProxy")) {
 
@@ -319,27 +319,27 @@ public class GAEProxyService extends Service {
 
 				handler.sendEmptyMessage(MSG_CONNECT_START);
 
-//				try {
-//					URL url = new URL("http://gae-ip-country.appspot.com/");
-//					HttpURLConnection conn = (HttpURLConnection) url
-//							.openConnection();
-//					conn.setConnectTimeout(5000);
-//					conn.setReadTimeout(8000);
-//					conn.connect();
-//					InputStream is = conn.getInputStream();
-//					BufferedReader input = new BufferedReader(
-//							new InputStreamReader(is));
-//					String code = input.readLine();
-//					if (code != null && code.length() > 0 && code.length() < 5) {
-//						Log.d(TAG, "Location: " + code);
-//						if (!code.contains("CN") && !code.contains("ZZ"))
-//							isDNSBlocked = false;
-//					}
-//				} catch (Exception e) {
-//					isDNSBlocked = true;
-//					Log.d(TAG, "Cannot get country info", e);
-//					// Nothing
-//				}
+				// try {
+				// URL url = new URL("http://gae-ip-country.appspot.com/");
+				// HttpURLConnection conn = (HttpURLConnection) url
+				// .openConnection();
+				// conn.setConnectTimeout(5000);
+				// conn.setReadTimeout(8000);
+				// conn.connect();
+				// InputStream is = conn.getInputStream();
+				// BufferedReader input = new BufferedReader(
+				// new InputStreamReader(is));
+				// String code = input.readLine();
+				// if (code != null && code.length() > 0 && code.length() < 5) {
+				// Log.d(TAG, "Location: " + code);
+				// if (!code.contains("CN") && !code.contains("ZZ"))
+				// isDNSBlocked = false;
+				// }
+				// } catch (Exception e) {
+				// isDNSBlocked = true;
+				// Log.d(TAG, "Cannot get country info", e);
+				// // Nothing
+				// }
 				isDNSBlocked = false;
 
 				Log.d(TAG, "IPTABLES: " + Utils.getIptables());
@@ -390,78 +390,78 @@ public class GAEProxyService extends Service {
 	/** Called when the activity is first created. */
 	public boolean handleConnection() {
 
-//		try {
-//			InetAddress addr = InetAddress.getByName("www.google.cn");
-//			appHost = addr.getHostAddress();
-//		} catch (Exception ignore) {
-//			// Nothing
-//		}
+		// try {
+		// InetAddress addr = InetAddress.getByName("www.google.cn");
+		// appHost = addr.getHostAddress();
+		// } catch (Exception ignore) {
+		// // Nothing
+		// }
 
-//		if (isDNSBlocked) {
-//
-//			if (appHost == null || !appHost.startsWith("203.208")) {
-//				appHost = settings.getString("appHost", "203.208.46.88");
-//
-//				try {
-//					URL aURL = new URL("http://myhosts.sinaapp.com/apphost");
-//					HttpURLConnection conn = (HttpURLConnection) aURL
-//							.openConnection();
-//					conn.setConnectTimeout(5 * 1000);
-//					conn.setReadTimeout(10 * 1000);
-//					conn.connect();
-//					InputStream is = conn.getInputStream();
-//					BufferedReader reader = new BufferedReader(
-//							new InputStreamReader(is));
-//					String line = reader.readLine();
-//					if (line == null)
-//						return false;
-//					if (!line.startsWith("#GAEPROXY"))
-//						return false;
-//					while (true) {
-//						line = reader.readLine();
-//						if (line == null)
-//							break;
-//						if (line.startsWith("#"))
-//							continue;
-//						line = line.trim().toLowerCase();
-//						if (line.equals(""))
-//							continue;
-//						if (!line.equals(appHost)) {
-//							File cache = new File(GAEProxyService.BASE
-//									+ "cache/dnscache");
-//							if (cache.exists())
-//								cache.delete();
-//							appHost = line;
-//							handler.sendEmptyMessage(MSG_HOST_CHANGE);
-//						}
-//						break;
-//					}
-//
-//				} catch (Exception e) {
-//					Log.e(TAG, "cannot get remote host files", e);
-//				}
-//			}
-//		} else {
-//			try {
-//				InetAddress addr = InetAddress
-//						.getByName("gaednsproxy.appspot.com");
-//				appHost = addr.getHostAddress();
-//			} catch (Exception ignore) {
-//				return false;
-//			}
-//		}
-//
-//		try {
-//			if (appHost.length() > 8) {
-//				String[] ips = appHost.split("\\.");
-//				if (ips.length == 4)
-//					appMask = ips[0] + "." + ips[1] + ".0.0";
-//				Log.d(TAG, appMask);
-//			}
-//
-//		} catch (Exception ignore) {
-//			return false;
-//		}
+		// if (isDNSBlocked) {
+		//
+		// if (appHost == null || !appHost.startsWith("203.208")) {
+		// appHost = settings.getString("appHost", "203.208.46.88");
+		//
+		// try {
+		// URL aURL = new URL("http://myhosts.sinaapp.com/apphost");
+		// HttpURLConnection conn = (HttpURLConnection) aURL
+		// .openConnection();
+		// conn.setConnectTimeout(5 * 1000);
+		// conn.setReadTimeout(10 * 1000);
+		// conn.connect();
+		// InputStream is = conn.getInputStream();
+		// BufferedReader reader = new BufferedReader(
+		// new InputStreamReader(is));
+		// String line = reader.readLine();
+		// if (line == null)
+		// return false;
+		// if (!line.startsWith("#GAEPROXY"))
+		// return false;
+		// while (true) {
+		// line = reader.readLine();
+		// if (line == null)
+		// break;
+		// if (line.startsWith("#"))
+		// continue;
+		// line = line.trim().toLowerCase();
+		// if (line.equals(""))
+		// continue;
+		// if (!line.equals(appHost)) {
+		// File cache = new File(GAEProxyService.BASE
+		// + "cache/dnscache");
+		// if (cache.exists())
+		// cache.delete();
+		// appHost = line;
+		// handler.sendEmptyMessage(MSG_HOST_CHANGE);
+		// }
+		// break;
+		// }
+		//
+		// } catch (Exception e) {
+		// Log.e(TAG, "cannot get remote host files", e);
+		// }
+		// }
+		// } else {
+		// try {
+		// InetAddress addr = InetAddress
+		// .getByName("gaednsproxy.appspot.com");
+		// appHost = addr.getHostAddress();
+		// } catch (Exception ignore) {
+		// return false;
+		// }
+		// }
+		//
+		// try {
+		// if (appHost.length() > 8) {
+		// String[] ips = appHost.split("\\.");
+		// if (ips.length == 4)
+		// appMask = ips[0] + "." + ips[1] + ".0.0";
+		// Log.d(TAG, appMask);
+		// }
+		//
+		// } catch (Exception ignore) {
+		// return false;
+		// }
 
 		// String host = proxy.trim().toLowerCase().split("/")[2];
 		// if (host == null || host.equals(""))
@@ -474,45 +474,44 @@ public class GAEProxyService extends Service {
 		// BetterHttp with HttpClient
 
 		if (isProxyDNS) {
-			dnsServer = new DNSServer(this, Utils.getDNS(getApplicationContext()), 53, appHost, isDNSBlocked);
+			dnsServer = new DNSServer(this,
+					Utils.getDNS(getApplicationContext()), 53, appHost,
+					isDNSBlocked);
 			dnsPort = dnsServer.getServPort();
 
 			// Random mirror for load balance
 			// only affect when appid equals proxyofmax
-//			if (proxy.equals("https://proxyofmax.appspot.com/fetch.py")) {
-//				proxyType = "GoAgent";
-//				String[] mirror_list = null;
-//				int mirror_num = 0;
-//				try {
-//					String mirror_string = new String(
-//							Base64.decode(getString(R.string.mirror_list)));
-//					mirror_list = mirror_string.split("\\|");
-//				} catch (IOException e) {
-//				}
-	//
-//				if (mirror_list != null) {
-//					mirror_num = mirror_list.length;
-//					Random random = new Random(System.currentTimeMillis());
-//					int n = random.nextInt(mirror_num);
-//					proxy = "https://" + mirror_list[n] + ".appspot.com/fetch.py";
-//					Log.d(TAG, "Balance Proxy: " + proxy);
-//				}
-//			}
+			// if (proxy.equals("https://proxyofmax.appspot.com/fetch.py")) {
+			// proxyType = "GoAgent";
+			// String[] mirror_list = null;
+			// int mirror_num = 0;
+			// try {
+			// String mirror_string = new String(
+			// Base64.decode(getString(R.string.mirror_list)));
+			// mirror_list = mirror_string.split("\\|");
+			// } catch (IOException e) {
+			// }
+			//
+			// if (mirror_list != null) {
+			// mirror_num = mirror_list.length;
+			// Random random = new Random(System.currentTimeMillis());
+			// int n = random.nextInt(mirror_num);
+			// proxy = "https://" + mirror_list[n] + ".appspot.com/fetch.py";
+			// Log.d(TAG, "Balance Proxy: " + proxy);
+			// }
+			// }
 		}
-		
 
-			if (!preConnection()) {
-				Log.e(TAG, "preConnection error!");
-				return false;
-			}
-				
+		if (!preConnection()) {
+			Log.e(TAG, "preConnection error!");
+			return false;
+		}
+
 		if (isProxyDNS) {
 			Thread dnsThread = new Thread(dnsServer);
 			dnsThread.setDaemon(true);
 			dnsThread.start();
 		}
-		
-		
 
 		connect();
 
@@ -589,14 +588,14 @@ public class GAEProxyService extends Service {
 	public void onCreate() {
 		super.onCreate();
 
-//		tracker = GoogleAnalyticsTracker.getInstance();
-//
-//		// Start the tracker in manual dispatch mode...
-//		tracker.startNewSession("UA-21682712-1", this);
-//
-//		tracker.trackPageView("/version-" + getVersionName());
-//
-//		tracker.dispatch();
+		// tracker = GoogleAnalyticsTracker.getInstance();
+		//
+		// // Start the tracker in manual dispatch mode...
+		// tracker.startNewSession("UA-21682712-1", this);
+		//
+		// tracker.trackPageView("/version-" + getVersionName());
+		//
+		// tracker.dispatch();
 
 		settings = PreferenceManager.getDefaultSharedPreferences(this);
 		notificationManager = (NotificationManager) this
@@ -630,7 +629,7 @@ public class GAEProxyService extends Service {
 	@Override
 	public void onDestroy() {
 
-//		tracker.stopSession();
+		// tracker.stopSession();
 
 		statusLock = true;
 
@@ -739,80 +738,80 @@ public class GAEProxyService extends Service {
 	 */
 	private boolean preConnection() {
 
-//		if (isHTTPSProxy) {
-//			InputStream is = null;
-//
-//			String socksIp = settings.getString("socksIp", null);
-//			String socksPort = settings.getString("socksPort", null);
-//
-//			String sig = Utils.getSignature(this);
-//
-//			if (sig == null)
-//				return false;
-//
-//			for (int tries = 0; tries < 2; tries++) {
-//				try {
-//					URL aURL = new URL(
-//							"http://myhosts.sinaapp.com/port3.php?sig=" + sig);
-//					HttpURLConnection conn = (HttpURLConnection) aURL
-//							.openConnection();
-//					conn.setConnectTimeout(4000);
-//					conn.setReadTimeout(8000);
-//					conn.connect();
-//					is = conn.getInputStream();
-//
-//					BufferedReader reader = new BufferedReader(
-//							new InputStreamReader(is));
-//
-//					String line = reader.readLine();
-//
-//					if (line.startsWith("ERROR"))
-//						return false;
-//
-//					if (!line.startsWith("#ip"))
-//						throw new Exception("Format error");
-//					line = reader.readLine();
-//					socksIp = line.trim().toLowerCase();
-//
-//					line = reader.readLine();
-//					if (!line.startsWith("#port"))
-//						throw new Exception("Format error");
-//					line = reader.readLine();
-//					socksPort = line.trim().toLowerCase();
-//
-//					Editor ed = settings.edit();
-//					ed.putString("socksIp", socksIp);
-//					ed.putString("socksPort", socksPort);
-//					ed.commit();
-//
-//				} catch (Exception e) {
-//					Log.e(TAG, "cannot get remote port info", e);
-//					continue;
-//				}
-//				break;
-//			}
-//
-//			if (socksIp == null || socksPort == null)
-//				return false;
-//
-//			Log.d(TAG, "Forward Successful");
-//			if (Utils.isRoot())
-//				Utils.runRootCommand(BASE + "proxy.sh start " + port + " "
-//						+ socksIp + " " + socksPort);
-//			else
-//				Utils.runCommand(BASE + "proxy.sh start " + port + " "
-//						+ socksIp + " " + socksPort);
-//
-//		} else {
+		// if (isHTTPSProxy) {
+		// InputStream is = null;
+		//
+		// String socksIp = settings.getString("socksIp", null);
+		// String socksPort = settings.getString("socksPort", null);
+		//
+		// String sig = Utils.getSignature(this);
+		//
+		// if (sig == null)
+		// return false;
+		//
+		// for (int tries = 0; tries < 2; tries++) {
+		// try {
+		// URL aURL = new URL(
+		// "http://myhosts.sinaapp.com/port3.php?sig=" + sig);
+		// HttpURLConnection conn = (HttpURLConnection) aURL
+		// .openConnection();
+		// conn.setConnectTimeout(4000);
+		// conn.setReadTimeout(8000);
+		// conn.connect();
+		// is = conn.getInputStream();
+		//
+		// BufferedReader reader = new BufferedReader(
+		// new InputStreamReader(is));
+		//
+		// String line = reader.readLine();
+		//
+		// if (line.startsWith("ERROR"))
+		// return false;
+		//
+		// if (!line.startsWith("#ip"))
+		// throw new Exception("Format error");
+		// line = reader.readLine();
+		// socksIp = line.trim().toLowerCase();
+		//
+		// line = reader.readLine();
+		// if (!line.startsWith("#port"))
+		// throw new Exception("Format error");
+		// line = reader.readLine();
+		// socksPort = line.trim().toLowerCase();
+		//
+		// Editor ed = settings.edit();
+		// ed.putString("socksIp", socksIp);
+		// ed.putString("socksPort", socksPort);
+		// ed.commit();
+		//
+		// } catch (Exception e) {
+		// Log.e(TAG, "cannot get remote port info", e);
+		// continue;
+		// }
+		// break;
+		// }
+		//
+		// if (socksIp == null || socksPort == null)
+		// return false;
+		//
+		// Log.d(TAG, "Forward Successful");
+		// if (Utils.isRoot())
+		// Utils.runRootCommand(BASE + "proxy.sh start " + port + " "
+		// + socksIp + " " + socksPort);
+		// else
+		// Utils.runCommand(BASE + "proxy.sh start " + port + " "
+		// + socksIp + " " + socksPort);
+		//
+		// } else {
 
-			Log.d(TAG, "Forward Successful");
-			if (Utils.isRoot())
-				Utils.runRootCommand(BASE + "proxy.sh start " + port + " "
-						+ "127.0.0.1" + " " + port);
-			else
-				Utils.runCommand(BASE + "proxy.sh start " + port + " "
-						+ "127.0.0.1" + " " + port);
-//		}
+		Log.d(TAG, "Forward Successful");
+		if (Utils.isRoot())
+			Utils.runRootCommand(BASE + "proxy.sh start " + port + " "
+					+ "127.0.0.1" + " " + port);
+		else
+			Utils.runCommand(BASE + "proxy.sh start " + port + " "
+					+ "127.0.0.1" + " " + port);
+		// }
 
 		StringBuffer init_sb = new StringBuffer();
 
@@ -833,11 +832,12 @@ public class GAEProxyService extends Service {
 						+ dnsPort + "\n");
 			}
 		}
-		
 
 		String cmd_bypass = Utils.getIptables() + CMD_IPTABLES_RETURN;
 
 		init_sb.append(cmd_bypass.replace("0.0.0.0", appMask + "/16"));
+		init_sb.append(cmd_bypass.replace("-d 0.0.0.0", "-m owner --uid-owner "
+				+ getApplicationInfo().uid));
 
 		if (isGFWList) {
 

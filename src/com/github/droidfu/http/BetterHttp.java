@@ -66,6 +66,7 @@ public class BetterHttp {
 			}
 		}
 	}
+
 	/**
 	 * Simple {@link HttpEntityWrapper} that inflates the wrapped
 	 * {@link HttpEntity} by passing it through {@link GZIPInputStream}.
@@ -85,9 +86,11 @@ public class BetterHttp {
 			return -1;
 		}
 	}
+
 	static final String LOG_TAG = "BetterHttp";
 	public static final int DEFAULT_MAX_CONNECTIONS = 4;
-	public static final int DEFAULT_SOCKET_TIMEOUT = 30 * 1000;
+	public static final int DEFAULT_SOCKET_TIMEOUT = 6 * 1000;
+	public static final int DEFAULT_CONN_TIMEOUT = 12 * 1000;
 
 	public static final String DEFAULT_HTTP_USER_AGENT = "Android/DroidFu";
 	private static final String HEADER_ACCEPT_ENCODING = "Accept-Encoding";
@@ -95,6 +98,7 @@ public class BetterHttp {
 
 	private static int maxConnections = DEFAULT_MAX_CONNECTIONS;
 	private static int socketTimeout = DEFAULT_SOCKET_TIMEOUT;
+	private static int connectionTimeout = DEFAULT_CONN_TIMEOUT;
 
 	private static String httpUserAgent = DEFAULT_HTTP_USER_AGENT;
 
@@ -133,6 +137,10 @@ public class BetterHttp {
 		return socketTimeout;
 	}
 
+	public static int getConnTimeout() {
+		return connectionTimeout;
+	}
+
 	public static BetterHttpRequest post(String url) {
 		return new HttpPost(httpClient, url, defaultHeaders);
 	}
@@ -167,17 +175,35 @@ public class BetterHttp {
 		httpClient.getConnectionManager().getSchemeRegistry().register(_scheme);
 	}
 
+	// /**
+	// * Adjust the socket timeout, i.e. the amount of time that may pass when
+	// * waiting for a server response. Time unit is milliseconds.
+	// *
+	// * @param socketTimeout
+	// * the timeout in milliseconds
+	// */
+	// public static void setSocketTimeout(int socketTimeout) {
+	// BetterHttp.socketTimeout = socketTimeout;
+	// HttpConnectionParams
+	// .setSoTimeout(httpClient.getParams(), socketTimeout);
+	// }
+
 	/**
 	 * Adjust the socket timeout, i.e. the amount of time that may pass when
 	 * waiting for a server response. Time unit is milliseconds.
 	 * 
 	 * @param socketTimeout
 	 *            the timeout in milliseconds
+	 * @param connTimeout
+	 *            the timeout in milliseconds
 	 */
-	public static void setSocketTimeout(int socketTimeout) {
+	public static void setTimeout(int socketTimeout, int connTimeout) {
 		BetterHttp.socketTimeout = socketTimeout;
+		BetterHttp.connectionTimeout = connTimeout;
 		HttpConnectionParams
 				.setSoTimeout(httpClient.getParams(), socketTimeout);
+		HttpConnectionParams.setConnectionTimeout(httpClient.getParams(),
+				connTimeout);
 	}
 
 	public static void setupHttpClient() {

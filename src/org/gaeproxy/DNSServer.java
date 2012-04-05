@@ -44,7 +44,7 @@ import com.j256.ormlite.dao.Dao;
  * @author biaji
  * 
  */
-public class DNSServer implements WrapServer {
+public class DNSServer implements Runnable {
 
 	public static byte[] int2byte(int res) {
 		byte[] targets = new byte[4];
@@ -89,9 +89,9 @@ public class DNSServer implements WrapServer {
 	private String target = "8.8.8.8:53";
 
 	private String appHost = "203.208.46.1";
-	
+
 	private String googleHost = "203.208.46.233";
-	
+
 	private Context context;
 
 	private static final String CANT_RESOLVE = "Error";
@@ -107,7 +107,7 @@ public class DNSServer implements WrapServer {
 		this.appHost = appHost;
 
 		BetterHttp.setupHttpClient();
-		BetterHttp.setSocketTimeout(10 * 1000);
+		BetterHttp.setTimeout(6 * 1000, 12 * 1000);
 
 		domains = new HashSet<String>();
 
@@ -116,8 +116,7 @@ public class DNSServer implements WrapServer {
 		OpenHelperManager.setOpenHelperClass(DatabaseHelper.class);
 
 		if (helper == null) {
-			helper = OpenHelperManager.getHelper(ctx,
-					DatabaseHelper.class);
+			helper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
 		}
 
 		if (dnsHost != null && !dnsHost.equals(""))
@@ -158,7 +157,6 @@ public class DNSServer implements WrapServer {
 		}
 	}
 
-	@Override
 	public void close() throws IOException {
 		inService = false;
 		srvSocket.close();
@@ -227,10 +225,11 @@ public class DNSServer implements WrapServer {
 	 * @return
 	 */
 	protected byte[] fetchAnswer(byte[] quest) {
-		
-		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-		String dns =  sp.getString("dns", Utils.getDNS(context));
-		if (dns.equals("")){
+
+		SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		String dns = sp.getString("dns", Utils.getDNS(context));
+		if (dns.equals("")) {
 			dns = Utils.getDNS(context);
 		}
 		Socket innerSocket = new InnerSocketBuilder(dns, dnsPort, target)
@@ -324,7 +323,6 @@ public class DNSServer implements WrapServer {
 		return requestDomain;
 	}
 
-	@Override
 	public int getServPort() {
 		return this.srvPort;
 	}
@@ -352,7 +350,6 @@ public class DNSServer implements WrapServer {
 
 	}
 
-	@Override
 	public boolean isClosed() {
 		return srvSocket.isClosed();
 	}
@@ -444,7 +441,8 @@ public class DNSServer implements WrapServer {
 
 		ips = ip.split("\\.");
 
-		Log.d(TAG, "Start parse ip string: " + ip + ", Sectons: " + ips.length);
+		// Log.d(TAG, "Start parse ip string: " + ip + ", Sectons: " +
+		// ips.length);
 
 		if (ips.length != IP_SECTION_LEN) {
 			Log.e(TAG, "Malformed IP string number of sections is: "
@@ -512,7 +510,7 @@ public class DNSServer implements WrapServer {
 			url = url.replace(host, appHost);
 		}
 
-		Log.d(TAG, "DNS Relay URL: " + url);
+		// Log.d(TAG, "DNS Relay URL: " + url);
 
 		// RFC 2616: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
 
@@ -561,21 +559,22 @@ public class DNSServer implements WrapServer {
 
 					sendDns(resp.getDNSResponse(), dnsq, srvSocket);
 
-					Log.d(TAG, "DNS cache hit");
+					Log.d(TAG, "DNS cache hit" + questDomain);
 
 				} else if (orgCache.containsKey(questDomain)) { // 如果为自定义域名解析
 					byte[] ips = parseIPString(orgCache.get(questDomain));
 					byte[] answer = createDNSResponse(udpreq, ips);
 					addToCache(questDomain, answer);
 					sendDns(answer, dnsq, srvSocket);
-					Log.d(TAG, "Custom DNS resolver");
+					Log.d(TAG, "Custom DNS resolver" + questDomain);
 				} else if (questDomain.toLowerCase().contains("appspot.com")) { // 如果为apphost域名解析
 					byte[] ips = parseIPString(appHost);
 					byte[] answer = createDNSResponse(udpreq, ips);
 					addToCache(questDomain, answer);
 					sendDns(answer, dnsq, srvSocket);
 					Log.d(TAG, "Custom DNS resolver: " + questDomain);
-				} else if (questDomain.toLowerCase().contains("android.clients.google.com")) { 
+				} else if (questDomain.toLowerCase().contains(
+						"android.clients.google.com")) {
 					byte[] ips = parseIPString(googleHost);
 					byte[] answer = createDNSResponse(udpreq, ips);
 					addToCache(questDomain, answer);
@@ -680,12 +679,6 @@ public class DNSServer implements WrapServer {
 		} catch (IOException e) {
 			Log.e(TAG, "", e);
 		}
-	}
-
-	@Override
-	public void setProxyHost(String host) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void setTarget(String target) {
